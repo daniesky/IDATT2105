@@ -1,4 +1,5 @@
 # calculator
+Project containing work done in Fullstack (IDATT2105) obligatory exercises.
 
 ## Project setup
 ```
