@@ -1,24 +1,70 @@
 <template>
-  <form>
-    <label for="fname">First name</label><br />
-    <input class="text" type="text" id="fname" name="fname" /><br />
-    <label for="lname">Last name</label><br />
-    <input class="text" type="text" id="lname" name="lname" /><br />
-    <label for="email">Email address</label><br />
-    <input class="text" type="text" id="email" name="email" /><br />
-    <label for="message">Feedback</label><br />
-    <textarea id="message" /><br />
-    <input class="submit" type="submit" value="Submit" />
-  </form>
+  <Form @submit="onSubmit" :validation-schema="simpleSchema" class="form">
+    <label>First name</label>
+    <Field v-model="fname" name="fname" class="text" />
+    <label>Last name</label>
+    <Field v-model="lname" name="lname" class="text" />
+    <label>Email</label>
+    <Field v-model="email" name="email" class="text" type="email" />
+    <label>Message</label>
+    <Field v-model="message" name="message" id="message1" />
+    <button class="submit" :disabled="!simpleSchemaValidate">Submit</button>
+  </Form>
 </template>
 <script>
+import { Form, Field } from "vee-validate";
+import EventService from "@/services/EventService.js";
+import * as yup from "yup";
+
+const simpleSchema = yup.object({
+  email: yup.string().required().email(),
+  fname: yup.string().required(),
+  lname: yup.string().required(),
+  message: yup.string().required(),
+});
+
 export default {
   name: "FormComp",
+  data() {
+    return {
+      reviews: null,
+      fname: "",
+      lname: "",
+      email: "",
+      message: "",
+    };
+  },
+  computed: {
+    simpleSchemaValidate() {
+      let val = this.validateSchema();
+      return Boolean(val);
+    },
+  },
+  methods: {
+    onSubmit() {
+      EventService.postForm(this.fname, this.lname, this.email, this.message);
+    },
+    validateSchema() {
+      return simpleSchema.isValidSync(
+        {
+          email: this.email,
+          fname: this.fname,
+          lname: this.lname,
+          message: this.message,
+        },
+        { strict: true }
+      );
+    },
+  },
+  components: {
+    Form,
+    Field,
+  },
 };
 </script>
 
 <style scoped>
-form {
+.form {
   display: grid;
   justify-content: center;
   align-items: center;
@@ -31,30 +77,41 @@ form {
 
 label {
   width: 30vw;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
 .text {
-  padding: 20px 28px;
+  padding: 15px 15px;
   box-sizing: border-box;
   border: 2px solid #42b983;
   border-radius: 4px;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-size: 1vw;
 }
 
 .submit {
   padding: 20px 28px;
   box-sizing: border-box;
-  border: 2px solid #42b983;
+  border: 2px solid black;
   border-radius: 4px;
   font-size: 1vw;
-  background-color: white;
+  background-color: #42b983;
   width: 10vw;
-  margin: auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 30px;
 }
 .submit:hover {
-  background-color: #42b983;
+  background-color: cornflowerblue;
+}
+.submit:disabled {
+  background-color: white;
+  border-color: #42b983;
 }
 
-#message {
+#message1 {
   height: 15vh;
   padding: 10px;
   font-size: 1vw;

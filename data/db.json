@@ -1,0 +1,11 @@
+{
+  "reviews": [
+    {
+      "id": 0,
+      "fname": "Daniel",
+      "lname": "Skymoen",
+      "email": "daniesky@ntnu.no",
+      "message": "Crazy good calculator bruv"
+    }
+  ]
+}
