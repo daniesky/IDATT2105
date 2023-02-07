@@ -43,9 +43,9 @@ export default {
   data() {
     return {
       reviews: null,
-      fname: "",
-      lname: "",
-      email: "",
+      fname: this.$store.state.fname,
+      lname: this.$store.state.lname,
+      email: this.$store.state.email,
       message: "",
       status: "",
     };
@@ -62,6 +62,7 @@ export default {
         .then(() => {
           //console.log(response);
           this.toastSuccess();
+          this.updateState();
         })
         .catch(() => {
           this.toastFail();
@@ -77,6 +78,13 @@ export default {
         },
         { strict: true }
       );
+    },
+    updateState() {
+      this.$store.commit("SET_STATE", {
+        fname: this.fname,
+        lname: this.lname,
+        email: this.email,
+      });
     },
   },
   components: {
