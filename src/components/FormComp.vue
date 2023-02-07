@@ -13,6 +13,8 @@
 </template>
 <script>
 import { Form, Field } from "vee-validate";
+import { createToast } from "mosha-vue-toastify";
+import "mosha-vue-toastify/dist/style.css";
 import EventService from "@/services/EventService.js";
 import * as yup from "yup";
 
@@ -25,6 +27,19 @@ const simpleSchema = yup.object({
 
 export default {
   name: "FormComp",
+  setup() {
+    const toastSuccess = () => {
+      createToast("Successfully uploaded form!", {
+        position: "bottom-center",
+      });
+    };
+    const toastFail = () => {
+      createToast("Could not upload form!", {
+        position: "bottom-center",
+      });
+    };
+    return { toastSuccess, toastFail };
+  },
   data() {
     return {
       reviews: null,
@@ -32,6 +47,7 @@ export default {
       lname: "",
       email: "",
       message: "",
+      status: "",
     };
   },
   computed: {
@@ -42,7 +58,14 @@ export default {
   },
   methods: {
     onSubmit() {
-      EventService.postForm(this.fname, this.lname, this.email, this.message);
+      EventService.postForm(this.fname, this.lname, this.email, this.message)
+        .then(() => {
+          //console.log(response);
+          this.toastSuccess();
+        })
+        .catch(() => {
+          this.toastFail();
+        });
     },
     validateSchema() {
       return simpleSchema.isValidSync(
