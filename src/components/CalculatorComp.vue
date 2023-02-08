@@ -115,61 +115,49 @@ export default {
           case "PLUS":
             this.numtwo = this.input * 1;
             this.sum = this.numone + this.numtwo;
-            //this.sum = Number(Math.round(this.sum + "e3") + "e-3");
             this.input = this.sum.toString();
             this.logMath("+", this.numone, this.numtwo, this.sum);
-            this.numone = 0;
-            this.numtwo = 0;
-            this.firstNum = true;
+            this.reset();
             break;
           case "MINUS":
             this.numtwo = this.input * 1;
             this.sum = this.numone - this.numtwo;
-            //this.sum = Number(Math.round(this.sum + "e3") + "e-3");
             this.input = this.sum.toString();
             this.logMath("-", this.numone, this.numtwo, this.sum);
-            this.numone = 0;
-            this.numtwo = 0;
-            this.firstNum = true;
+            this.reset();
             break;
           case "MULTIPLY":
             this.numtwo = this.input * 1;
             this.sum = this.numone * this.numtwo;
-            //this.sum = Number(Math.round(this.sum + "e3") + "e-3");
             this.input = this.sum.toString();
             this.logMath("×", this.numone, this.numtwo, this.sum);
-            this.numone = 0;
-            this.numtwo = 0;
-            this.firstNum = true;
+            this.reset();
             break;
           case "DIVIDE":
             this.numtwo = this.input * 1;
             if (this.numtwo == 0) {
               alert("You can't divide by zero!");
-              this.input = "";
-              this.numone = 0;
-              this.numtwo = 0;
-              this.firstNum = true;
+              this.clear();
               break;
             }
             this.sum = this.numone / this.numtwo;
-            //this.sum = Number(Math.round(this.sum + "e3") + "e-3");
             this.input = this.sum.toString();
             this.logMath("÷", this.numone, this.numtwo, this.sum);
-            this.numone = 0;
-            this.numtwo = 0;
-            this.firstNum = true;
+            this.reset();
             break;
           case "":
             this.equals(this.method);
         }
       }
     },
-    clear() {
-      this.input = "";
+    reset(){
       this.numone = 0;
       this.numtwo = 0;
       this.firstNum = true;
+    },
+    clear() {
+      this.input = "";
+      this.reset();
     },
 
     backspace() {

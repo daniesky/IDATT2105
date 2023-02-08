@@ -70,4 +70,26 @@ describe("CalculatorComp.vue", () => {
         await -wrapper.find("#EQUALS").trigger("click");
         expect(parseInt(wrapper.find(".inputholder").text())).toBe(5)
     })
+
+    it("Testing emit math history to log",async () => {
+        //We first simulate a math event performed by the user, causing the emit to occur. 
+        const wrapper = mount(CalculatorComp, {
+            data() {
+                return{
+                    numone: 100,
+                    input: "20",
+                    firstNum: false,
+                    method: "DIVIDE",
+                    numtwo:0
+                }
+            }
+        });
+        await -wrapper.find("#EQUALS").trigger("click");
+        
+        const emitOccured = wrapper.emitted("log");
+        expect(emitOccured).toHaveLength(1);
+        
+        const expectedPayload = ["÷",100,20,5];
+        expect(wrapper.emitted("log")[0]).toMatchObject(expectedPayload);
+    })
 });
