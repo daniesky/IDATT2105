@@ -6,6 +6,13 @@
       "lname": "Skymoen",
       "email": "daniesky@ntnu.no",
       "message": "Crazy good calculator bruv"
+    },
+    {
+      "fname": "Marthe",
+      "lname": "Berg",
+      "email": "marthebrg@hotmail.com",
+      "message": "Beste kalkulatoren <3 Får alltid rett:-)",
+      "id": 1
     }
   ]
 }

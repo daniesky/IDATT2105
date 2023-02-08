@@ -60,7 +60,7 @@
     <button class="div20 button" @click="numPressed('.')" id="DOT">
       <div class="buttontext">.</div>
     </button>
-    <button class="div21 button button2" @click="equals('')" id="EQUALS">
+    <button class="div21 button button2" @click="mathFunc('')" id="EQUALS">
       <div class="buttontext">=</div>
     </button>
   </div>
