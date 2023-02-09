@@ -1,11 +1,11 @@
 <template>
   <Form @submit="onSubmit" :validation-schema="simpleSchema" class="form">
     <label>First name</label>
-    <Field v-model="fname" name="fname" class="text" />
+    <Field v-model="fname" name="fname" class="text"/>
     <label>Last name</label>
-    <Field v-model="lname" name="lname" class="text" />
+    <Field v-model="lname" name="lname" class="text"/>
     <label>Email</label>
-    <Field v-model="email" name="email" class="text" type="email" />
+    <Field v-model="email" name="email" class="text" type="email"/>
     <label>Message</label>
     <Field v-model="message" name="message" id="message1" />
     <button class="submit" :disabled="!simpleSchemaValidate">Submit</button>
@@ -31,11 +31,14 @@ export default {
     const toastSuccess = () => {
       createToast("Successfully uploaded form!", {
         position: "bottom-center",
+        duration: 0,
       });
     };
+
     const toastFail = () => {
       createToast("Could not upload form!", {
         position: "bottom-center",
+        duration: 0,
       });
     };
     return { toastSuccess, toastFail };
@@ -65,6 +68,7 @@ export default {
         })
         .catch(() => {
           this.toastFail();
+          this.updateState();
         });
     },
     validateSchema() {
