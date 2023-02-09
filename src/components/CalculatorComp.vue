@@ -150,7 +150,7 @@ export default {
         }
       }
     },
-    reset(){
+    reset() {
       this.numone = 0;
       this.numtwo = 0;
       this.firstNum = true;

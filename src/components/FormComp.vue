@@ -15,7 +15,7 @@
 import { Form, Field } from "vee-validate";
 import { createToast } from "mosha-vue-toastify";
 import "mosha-vue-toastify/dist/style.css";
-import EventService from "@/services/EventService.js";
+import EventService from "/src/services/EventService.js";
 import * as yup from "yup";
 
 const simpleSchema = yup.object({
@@ -60,7 +60,6 @@ export default {
     onSubmit() {
       EventService.postForm(this.fname, this.lname, this.email, this.message)
         .then(() => {
-          //console.log(response);
           this.toastSuccess();
           this.updateState();
         })

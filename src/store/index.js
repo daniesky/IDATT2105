@@ -1,19 +1,22 @@
 import { createStore } from "vuex";
 
-export default createStore({
+export default createStore(
+  { 
   state: {
-    fname: "",
-    lname: "",
-    email: "",
+  fname: "",
+  lname: "",
+  email: "",
+},
+getters: {},
+mutations: {
+  SET_STATE(state, { fname, lname, email }) {
+    state.fname = fname;
+    state.lname = lname;
+    state.email = email;
   },
-  getters: {},
-  mutations: {
-    SET_STATE(state, { fname, lname, email }) {
-      state.fname = fname;
-      state.lname = lname;
-      state.email = email;
-    },
-  },
-  actions: {},
-  modules: {},
+},
+actions: {},
+modules: {},
 });
+
+
