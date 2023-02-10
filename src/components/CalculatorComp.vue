@@ -157,6 +157,7 @@ export default {
     },
     clear() {
       this.input = "";
+      this.method = "";
       this.reset();
     },
 
