@@ -25,10 +25,7 @@ public class CalculatorController {
 
     @PostMapping("/calculate")
     public double calculate(@RequestBody Equation eq){
-        logger.info("Equation: ",eq.getEq(),"=",service.solve(eq));
-        if(service.addToLog(eq.getEq())){
-            logger.info("Added to log: " + eq.getEq());
-        }
+        logger.info("Equation: " + eq.getEq() + " = " + service.solve(eq));
         return service.solve(eq);
     }
 
