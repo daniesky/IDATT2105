@@ -91,8 +91,8 @@ describe("CalculatorComp.vue", () => {
     const expectedPayload = ["÷", 100, 20, 5];
     expect(wrapper.emitted("log")[0]).toMatchObject(expectedPayload);
   });
-  
-  it("Testing the clear button",async () => {
+
+  it("Testing the clear button", async () => {
     const wrapper = mount(CalculatorComp, {
       data() {
         return {
@@ -111,7 +111,7 @@ describe("CalculatorComp.vue", () => {
     expect(wrapper.vm.numtwo).toBe(0);
     expect(wrapper.vm.firstNum).toBe(true);
     expect(wrapper.vm.method).toBe("");
-  })
+  });
 
   it("Testing that answer button displays properly", async () => {
     const wrapper = mount(CalculatorComp, {
@@ -130,9 +130,9 @@ describe("CalculatorComp.vue", () => {
     wrapper.find("#C").trigger("click");
     wrapper.find("#ANS").trigger("click");
     expect(wrapper.find(".inputholder").text()).toBe("150");
-  })
+  });
 
-  it("Testing delete button",async () => {
+  it("Testing delete button", async () => {
     const wrapper = mount(CalculatorComp, {
       data() {
         return {
@@ -142,6 +142,5 @@ describe("CalculatorComp.vue", () => {
     });
     await wrapper.find("#DEL").trigger("click");
     expect(wrapper.find(".inputholder").text()).toBe("1");
-
-  })
+  });
 });

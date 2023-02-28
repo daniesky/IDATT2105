@@ -12,7 +12,7 @@
     <button class="div4 button" @click="backspace()" id="DEL">
       <div class="buttontext">DEL</div>
     </button>
-    <button class="div5 button" @click="mathFunc('PLUS')" id="PLUS">
+    <button class="div5 button" @click="mathFunc('+')" id="PLUS">
       <div class="buttontext">+</div>
     </button>
     <button class="div6 button" @click="numPressed('1')" id="ONE">
@@ -24,7 +24,7 @@
     <button class="div8 button" @click="numPressed('3')" id="THREE">
       <div class="buttontext">3</div>
     </button>
-    <button class="div9 button" @click="mathFunc('MINUS')" id="MINUS">
+    <button class="div9 button" @click="mathFunc('-')" id="MINUS">
       <div class="buttontext">-</div>
     </button>
     <button class="div10 button" @click="numPressed('4')" id="FOUR">
@@ -36,7 +36,7 @@
     <button class="div12 button" @click="numPressed('6')" id="SIX">
       <div class="buttontext">6</div>
     </button>
-    <button class="div13 button" @click="mathFunc('MULTIPLY')" id="MULTIPLY">
+    <button class="div13 button" @click="mathFunc('*')" id="MULTIPLY">
       <div class="buttontext">×</div>
     </button>
     <button class="div14 button" @click="numPressed('7')" id="SEVEN">
@@ -48,7 +48,7 @@
     <button class="div16 button" @click="numPressed('9')" id="NINE">
       <div class="buttontext">9</div>
     </button>
-    <button class="div17 button" @click="mathFunc('DIVIDE')" id="DIVIDE">
+    <button class="div17 button" @click="mathFunc('/')" id="DIVIDE">
       <div class="buttontext">÷</div>
     </button>
     <button class="div18 button" id="BLANK">
@@ -66,6 +66,7 @@
   </div>
 </template>
 <script>
+import CalculatorService from "/src/services/CalculatorService.js";
 export default {
   name: "CalculatorComp",
   created() {
@@ -103,14 +104,30 @@ export default {
           this.numtwo = 0;
           this.method = math;
         } else {
-          this.numone = this.equals(math);
+          this.numone = this.equals();
           this.numtwo = 0;
           this.sum = 0;
         }
       }
     },
-    equals(math) {
+    equals() {
       if (!this.firstNum && this.input !== "" && this.input !== ".") {
+        this.numtwo = this.input * 1;
+        CalculatorService.postCalc(this.numone, this.numtwo, this.method)
+          .then((response) => {
+            console.log(response);
+            let x = response;
+            this.input = x.toString();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        this.sum = this.input * 1;
+        console.log(this.method, this.numone, this.numtwo, this.sum);
+        this.logMath(this.method, this.numone, this.numtwo, this.sum);
+        this.reset();
+
+        /*
         switch (math) {
           case "PLUS":
             this.numtwo = this.input * 1;
@@ -148,6 +165,7 @@ export default {
           case "":
             this.equals(this.method);
         }
+        */
       }
     },
     reset() {

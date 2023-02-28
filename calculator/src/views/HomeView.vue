@@ -23,13 +23,7 @@ export default {
   methods: {
     addToLog(symbol, numone, numtwo, sum) {
       this.log.push(
-        numone.toString() +
-          " " +
-          symbol +
-          " " +
-          numtwo.toString() +
-          " = " +
-          sum.toString()
+        numone.toString() + " " + symbol + " " + numtwo.toString() + " = " + sum
       );
     },
   },

@@ -3,10 +3,9 @@ package ntnu.idatt2105.calculatorbackend.controller;
 import ntnu.idatt2105.calculatorbackend.model.Equation;
 import ntnu.idatt2105.calculatorbackend.service.EquationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
 @RestController
 public class CalculatorController {
 
@@ -19,8 +18,8 @@ public class CalculatorController {
     }
 
     @PostMapping("/calculate")
-    public double calculate(String expr){
-        Equation eq = new Equation(expr);
+    public double calculate(@RequestBody Equation eq){
+        System.out.println(eq.getEq());
         return service.solve(eq);
     }
 
