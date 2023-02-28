@@ -104,9 +104,9 @@ export default {
           this.numtwo = 0;
           this.method = math;
         } else {
-          this.numone = this.equals();
           this.numtwo = 0;
           this.sum = 0;
+          this.equals();
         }
       }
     },
@@ -115,57 +115,15 @@ export default {
         this.numtwo = this.input * 1;
         CalculatorService.postCalc(this.numone, this.numtwo, this.method)
           .then((response) => {
-            console.log(response);
             let x = response;
             this.input = x.toString();
+            this.sum = this.input * 1;
+            this.logMath(this.method, this.numone, this.numtwo, this.sum);
+            this.reset();
           })
           .catch((error) => {
             console.log(error);
           });
-        this.sum = this.input * 1;
-        console.log(this.method, this.numone, this.numtwo, this.sum);
-        this.logMath(this.method, this.numone, this.numtwo, this.sum);
-        this.reset();
-
-        /*
-        switch (math) {
-          case "PLUS":
-            this.numtwo = this.input * 1;
-            this.sum = this.numone + this.numtwo;
-            this.input = this.sum.toString();
-            this.logMath("+", this.numone, this.numtwo, this.sum);
-            this.reset();
-            break;
-          case "MINUS":
-            this.numtwo = this.input * 1;
-            this.sum = this.numone - this.numtwo;
-            this.input = this.sum.toString();
-            this.logMath("-", this.numone, this.numtwo, this.sum);
-            this.reset();
-            break;
-          case "MULTIPLY":
-            this.numtwo = this.input * 1;
-            this.sum = this.numone * this.numtwo;
-            this.input = this.sum.toString();
-            this.logMath("×", this.numone, this.numtwo, this.sum);
-            this.reset();
-            break;
-          case "DIVIDE":
-            this.numtwo = this.input * 1;
-            if (this.numtwo == 0) {
-              alert("You can't divide by zero!");
-              this.clear();
-              break;
-            }
-            this.sum = this.numone / this.numtwo;
-            this.input = this.sum.toString();
-            this.logMath("÷", this.numone, this.numtwo, this.sum);
-            this.reset();
-            break;
-          case "":
-            this.equals(this.method);
-        }
-        */
       }
     },
     reset() {
@@ -216,16 +174,16 @@ export default {
           this.clear();
           break;
         case "+":
-          this.mathFunc("PLUS");
+          this.mathFunc("+");
           break;
         case "-":
-          this.mathFunc("MINUS");
+          this.mathFunc("-");
           break;
         case "*":
-          this.mathFunc("MULTIPLY");
+          this.mathFunc("*");
           break;
         case "/":
-          this.mathFunc("DIVIDE");
+          this.mathFunc("/");
           break;
       }
     },
