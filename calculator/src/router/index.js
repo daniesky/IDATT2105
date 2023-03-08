@@ -3,8 +3,8 @@ import HomeView from "../views/HomeView.vue";
 
 const routes = [
   {
-    path: "/",
-    name: "home",
+    path: "/calculator",
+    name: "calculator",
     component: HomeView,
   },
   {
@@ -13,6 +13,11 @@ const routes = [
 
     component: () =>
       import(/* webpackChunkName: "contactform" */ "../views/FormView.vue"),
+  },
+  {
+    path: "/",
+    name: "login",
+    component: () => import("../views/LoginView.vue"),
   },
 ];
 
