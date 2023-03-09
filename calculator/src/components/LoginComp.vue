@@ -1,6 +1,7 @@
 <template>
   <div class="header">
     <h1>Calculator app</h1>
+    <p>If account does not exist, new one will be created</p>
   </div>
   <Form :validation-schema="simpleSchema" class="form" @submit="onSubmit">
     <label>Username</label>
@@ -8,7 +9,6 @@
     <label>Password</label>
     <Field type="password" v-model="password" name="password" class="text" />
     <button class="submit" :disabled="!simpleSchemaValidate">Login</button>
-    <button class="submit">New account</button>
   </Form>
 </template>
 
@@ -58,14 +58,17 @@ export default {
   display: grid;
   justify-content: center;
   align-items: center;
-  margin-bottom: auto;
-}
-h1 {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 2vw;
   vertical-align: center;
+}
+h1 {
+  font-size: 2vw;
+  margin-left: 14px;
+}
+p {
+  font-style: italic;
 }
 .form {
   display: grid;
@@ -93,7 +96,7 @@ label {
   font-size: 1vw;
   text-align: center;
 }
-.submit {
+button {
   padding: 20px 28px;
   box-sizing: border-box;
   border: 2px solid black;
@@ -105,10 +108,10 @@ label {
   margin-left: auto;
   margin-top: 30px;
 }
-.submit:hover {
+button:hover {
   background-color: cornflowerblue;
 }
-.submit:disabled {
+button:disabled {
   background-color: white;
   border-color: #42b983;
 }
