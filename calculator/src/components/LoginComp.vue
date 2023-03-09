@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <h1>Calculator app</h1>
-    <p>If account does not exist, new one will be created</p>
+    <p>Create a new user or login with existing user</p>
   </div>
   <Form :validation-schema="simpleSchema" class="form" @submit="onSubmit">
     <label>Username</label>
@@ -15,7 +15,7 @@
 <script>
 import { Form, Field } from "vee-validate";
 import * as yup from "yup";
-//import router from "@/router/index.js";
+import LoginService from "@/services/LoginService";
 
 const simpleSchema = yup.object({
   username: yup.string().required(),
@@ -47,7 +47,19 @@ export default {
       });
     },
     onSubmit() {
-      this.$emit("login");
+      LoginService.login(this.username, this.password)
+        .then((response) => {
+          if (response.status == 200) {
+            this.$emit("login");
+          } else if (response.status == 401) {
+            alert("Invalid username or password");
+          } else {
+            alert("Something went wrong" + response.data);
+          }
+        })
+        .catch((error) => {
+          alert("Something went wrong" + error.data);
+        });
     },
   },
 };
